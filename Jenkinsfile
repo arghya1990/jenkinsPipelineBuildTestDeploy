@@ -1,7 +1,7 @@
 node('master') {
   
    stage 'Git Checkout'
-     git 'hhttps://github.com/arghya1990/jenkinsPipelineBuildTestDeploy.git'
+     git 'https://github.com/arghya1990/jenkinsPipelineBuildTestDeploy.git'
          echo 'checkout done'
 
   
