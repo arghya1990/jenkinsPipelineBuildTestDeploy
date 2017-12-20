@@ -1,23 +1,9 @@
 node('master') {
+  checkout([$class: 'GitSCM', branches: [[name: '*/master']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/arghya1990/jenkinsPipelineBuildTestDeploy'], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/arghya1990/jenkinsPipelineBuildTestDeploy.git']]])
+  bat 'mvnw.cmd clean install'
+  bat '''cd dockerdocker build -t spring-petclinic .'''docker build -t spring-petclinic .'''
   
-   stage 'Git Checkout'
-     git 'https://github.com/arghya1990/jenkinsPipelineBuildTestDeploy.git'
-     echo 'checkout done'
-
   
-  stage('Maven Build'){    
-    echo 'Maven Project Compile'      
-    maven 'clean install' 
-           
-    junit 'target/surefire-reports/**/*.xml'     
-      
-  }
-  stage 'Deploy'  
-  echo 'Deploying Docker Image'
   
-   stage 'Testing'   
-   echo 'Reporting Getting Creating'
   
-   stage 'Job Status Report'    
-   echo 'Sending Notification'
 }
