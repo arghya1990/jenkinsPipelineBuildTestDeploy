@@ -1,15 +1,27 @@
 node('master') {
   
    stage 'Git Checkout'
-     git 'https://github.com/harishchanderdalal/jenkinsPipelineBuildTestDeploy.git'
+     git 'hhttps://github.com/arghya1990/jenkinsPipelineBuildTestDeploy.git'
          echo 'checkout done'
 
-   stage 'Maven Validate'
-         echo 'maven validate'
-
-   stage 'Maven Compile'
-                echo 'Maven Project Compile'
-
+  
+  stage('Maven Build'){    
+    echo 'Maven Project Compile'      
+    steps {              
+      sh '''                    
+      echo "PATH = ${PATH}"             
+      echo "M2_HOME = ${M2_HOME}"       
+      '''            
+     }     
+    steps{       
+      sh 'mvn install'     
+     }      
+    post {        
+      success {         
+        junit 'target/surefire-reports/**/*.xml'     
+      }    
+    }  
+  }
    stage 'Test Case'
         echo 'Test Case will running'
 
